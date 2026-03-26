@@ -1,0 +1,618 @@
+.my-applications-page {
+    min-height: 100vh;
+    background: #f5f7fa;
+    display: flex;
+    flex-direction: column;
+
+    .applications-container {
+        padding: 40px 20px;
+        flex: 1;
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+
+            > div:first-child {
+                flex: 1;
+                min-width: 250px;
+            }
+
+            h1 {
+                font-size: 28px;
+                font-weight: 700;
+                margin-bottom: 6px;
+                color: #1f2937;
+            }
+
+            p {
+                color: #6b7280;
+                margin: 0;
+                font-size: 15px;
+            }
+
+            .header-stats {
+                display: flex;
+                gap: 16px;
+                flex-wrap: wrap;
+
+                .stat-item {
+                    background: white;
+                    padding: 16px 20px;
+                    border-radius: 12px;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    min-width: 80px;
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+                    &:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+                    }
+
+                    .stat-number {
+                        font-size: 28px;
+                        font-weight: 700;
+                        background: linear-gradient(135deg, #008060 0%, #2bab60 100%);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                        line-height: 1;
+                        margin-bottom: 6px;
+                    }
+
+                    .stat-label {
+                        font-size: 12px;
+                        color: #6b7280;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            @media (max-width: 768px) {
+                flex-direction: column;
+
+                .header-stats {
+                    width: 100%;
+                    justify-content: space-between;
+
+                    .stat-item {
+                        flex: 1;
+                        min-width: 0;
+                    }
+                }
+            }
+        }
+
+        .loading-state,
+        .empty-state {
+            background: white;
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+            i {
+                font-size: 50px;
+                color: #008060;
+                margin-bottom: 15px;
+            }
+
+            img {
+                width: 120px;
+                margin-bottom: 20px;
+            }
+
+            h3 {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            p {
+                color: #666;
+                margin-bottom: 20px;
+            }
+
+            .btn-explore {
+                display: inline-block;
+                padding: 12px 24px;
+                border-radius: 8px;
+                background: linear-gradient(135deg, #008060 0%, #2bab60 100%);
+                color: white;
+                text-decoration: none;
+                font-weight: 600;
+            }
+        }
+
+        .applications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .application-card {
+            background: white;
+            border-radius: 16px;
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: visible;
+
+            // Ticket design - dashed border effect
+            &::before {
+                content: '';
+                position: absolute;
+                left: 65%;
+                top: 0;
+                bottom: 0;
+                width: 1px;
+                background: repeating-linear-gradient(
+                    to bottom,
+                    transparent 0,
+                    transparent 10px,
+                    #e5e7eb 10px,
+                    #e5e7eb 20px
+                );
+                z-index: 1;
+            }
+
+            // Decorative circles on the border (ticket holes)
+            &::after {
+                content: '';
+                position: absolute;
+                left: 65%;
+                top: -8px;
+                width: 16px;
+                height: 16px;
+                background: #f5f7fa;
+                border-radius: 50%;
+                border: 1px solid #e5e7eb;
+                z-index: 2;
+            }
+
+            // Bottom circle
+            .ticket-hole-bottom {
+                position: absolute;
+                left: 65%;
+                bottom: -8px;
+                width: 16px;
+                height: 16px;
+                background: #f5f7fa;
+                border-radius: 50%;
+                border: 1px solid #e5e7eb;
+                z-index: 2;
+            }
+
+            // Left side - Job info
+            .job-info {
+                padding: 24px;
+                position: relative;
+                z-index: 0;
+            }
+
+            // Right side - Application meta
+            .application-meta {
+                padding: 24px;
+                position: relative;
+                z-index: 0;
+                overflow: visible;
+            }
+
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 30px rgba(0, 128, 96, 0.15);
+                border-color: #008060;
+            }
+
+            .job-title-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 12px;
+                margin-bottom: 12px;
+
+                h3 {
+                    margin: 0;
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #1f2937;
+                    line-height: 1.4;
+                    flex: 1;
+                }
+            }
+
+            .company-name {
+                margin: 0 0 16px 0;
+                color: #4b5563;
+                font-weight: 600;
+                font-size: 15px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                &::before {
+                    content: '🏢';
+                    font-size: 16px;
+                }
+            }
+
+            .job-meta {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                margin-top: 12px;
+
+                span {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 6px 12px;
+                    background: rgba(0, 128, 96, 0.08);
+                    border-radius: 8px;
+                    color: #374151;
+                    font-size: 13px;
+                    font-weight: 500;
+
+                    i {
+                        color: #008060;
+                        font-size: 12px;
+                    }
+                }
+            }
+
+            .application-meta {
+                background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+                border-left: 3px solid #008060;
+                padding: 24px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                position: relative;
+
+                // Decorative corner
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 60px;
+                    height: 60px;
+                    background: linear-gradient(135deg, transparent 50%, rgba(0, 128, 96, 0.05) 50%);
+                    border-radius: 0 16px 0 0;
+                }
+
+                p {
+                    margin: 0;
+                    font-size: 14px;
+                    color: #374151;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+
+                    span {
+                        display: block;
+                        font-size: 11px;
+                        color: #6b7280;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        font-weight: 600;
+                    }
+                }
+
+                .actions {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    margin-top: 8px;
+                    position: relative;
+
+                    .btn-submit-documents {
+                        width: 100%;
+                        padding: 12px 16px;
+                        border-radius: 8px;
+                        border: none;
+                        background: linear-gradient(135deg, #008060 0%, #2bab60 100%);
+                        color: white;
+                        font-weight: 600;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 8px;
+                        box-shadow: 0 2px 8px rgba(0, 128, 96, 0.2);
+                        
+                        &:hover {
+                            transform: translateY(-2px);
+                            box-shadow: 0 4px 12px rgba(0, 128, 96, 0.3);
+                        }
+                        
+                        i {
+                            font-size: 16px;
+                        }
+                    }
+
+                    a {
+                        text-align: center;
+                        padding: 10px 16px;
+                        border-radius: 8px;
+                        border: 1.5px solid #e5e7eb;
+                        color: #374151;
+                        text-decoration: none;
+                        font-weight: 600;
+                        font-size: 13px;
+                        transition: all 0.3s ease;
+                        background: white;
+
+                        &:hover {
+                            background: #f9fafb;
+                            border-color: #008060;
+                            color: #008060;
+                            transform: translateX(4px);
+                        }
+
+                        &:first-child {
+                            border-color: #3b82f6;
+                            color: #3b82f6;
+
+                            &:hover {
+                                background: #eff6ff;
+                                border-color: #2563eb;
+                                color: #2563eb;
+                            }
+                        }
+                    }
+
+                    .btn-test {
+                        flex: 1;
+                        border: none;
+                        border-radius: 8px;
+                        font-weight: 600;
+                        font-size: 14px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 8px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
+                        padding: 12px 16px;
+
+                        // Pulse animation for start button
+                        @keyframes pulseGlow {
+                            0%, 100% {
+                                box-shadow: 0 4px 12px rgba(0, 128, 96, 0.3),
+                                            0 0 0 0 rgba(0, 128, 96, 0.4);
+                            }
+                            50% {
+                                box-shadow: 0 4px 20px rgba(0, 128, 96, 0.5),
+                                            0 0 0 8px rgba(0, 128, 96, 0);
+                            }
+                        }
+
+                        @keyframes bounce {
+                            0%, 100% {
+                                transform: translateY(0);
+                            }
+                            50% {
+                                transform: translateY(-3px);
+                            }
+                        }
+
+                        // Shimmer effect for start button
+                        @keyframes shimmer {
+                            0% {
+                                transform: translateX(-100%);
+                            }
+                            100% {
+                                transform: translateX(100%);
+                            }
+                        }
+
+                        &.btn-start {
+                            background: linear-gradient(135deg, #008060 0%, #2bab60 100%);
+                            color: white;
+                            box-shadow: 0 4px 12px rgba(0, 128, 96, 0.3);
+                            animation: pulseGlow 2s ease-in-out infinite;
+                            position: relative;
+
+                            // Shimmer overlay
+                            &::before {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                left: -100%;
+                                width: 100%;
+                                height: 100%;
+                                background: linear-gradient(
+                                    90deg,
+                                    transparent,
+                                    rgba(255, 255, 255, 0.3),
+                                    transparent
+                                );
+                                animation: shimmer 3s infinite;
+                            }
+
+                            // Icon bounce animation
+                            i {
+                                animation: bounce 2s ease-in-out infinite;
+                            }
+
+                            &:hover {
+                                animation: none;
+                                transform: translateY(-3px) scale(1.02);
+                                box-shadow: 0 8px 25px rgba(0, 128, 96, 0.5),
+                                            0 0 0 4px rgba(0, 128, 96, 0.2);
+                            }
+
+                            &:active {
+                                transform: translateY(-1px) scale(0.98);
+                            }
+                        }
+
+                        &.btn-resume {
+                            background: linear-gradient(135deg, #008060 0%, #2bab60 100%);
+                            color: white;
+                            box-shadow: 0 4px 12px rgba(0, 128, 96, 0.3);
+
+                            &:hover {
+                                transform: translateY(-2px);
+                                box-shadow: 0 6px 20px rgba(0, 128, 96, 0.4);
+                            }
+                        }
+
+                        &.btn-completed {
+                            background: linear-gradient(135deg, #008060 0%, #2bab60 100%);
+                            color: white;
+                            cursor: pointer;
+
+                            &:hover {
+                                transform: translateY(-2px);
+                                box-shadow: 0 6px 20px rgba(0, 128, 96, 0.4);
+                            }
+                        }
+
+                        &.btn-pending,
+                        &.grading {
+                            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+                            color: #0284c7;
+                            cursor: not-allowed;
+                            border: 1.5px solid #0284c7;
+                            position: relative;
+
+                            // Clock rotation animation
+                            i.fa-clock {
+                                animation: clockRotate 2s linear infinite;
+                            }
+
+                            @keyframes clockRotate {
+                                0% {
+                                    transform: rotate(0deg);
+                                }
+                                100% {
+                                    transform: rotate(360deg);
+                                }
+                            }
+
+                            // Pulse effect for grading
+                            &.grading {
+                                animation: gradingPulse 2s ease-in-out infinite;
+                            }
+
+                            @keyframes gradingPulse {
+                                0%, 100% {
+                                    opacity: 1;
+                                    box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.4);
+                                }
+                                50% {
+                                    opacity: 0.9;
+                                    box-shadow: 0 0 0 8px rgba(2, 132, 199, 0);
+                                }
+                            }
+                        }
+
+                        &:disabled {
+                            opacity: 0.6;
+                            cursor: not-allowed;
+                        }
+
+                        &:not(:disabled):hover:not(.btn-start) {
+                            transform: translateY(-2px);
+                        }
+                    }
+                }
+            }
+
+            .status-badge {
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                white-space: nowrap;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+                &.status-1 { 
+                    background: linear-gradient(135deg, #fff5eb 0%, #ffe4cc 100%);
+                    color: #f7931a;
+                    border: 1px solid rgba(247, 147, 26, 0.2);
+                }
+                &.status-2 { 
+                    background: linear-gradient(135deg, #ecfdf3 0%, #d1fae5 100%);
+                    color: #22c55e;
+                    border: 1px solid rgba(34, 197, 94, 0.2);
+                }
+                &.status-3 { 
+                    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+                    color: #ef4444;
+                    border: 1px solid rgba(239, 68, 68, 0.2);
+                }
+                &.status-4 { 
+                    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+                    color: #0284c7;
+                    border: 1px solid rgba(2, 132, 199, 0.2);
+                }
+                &.status-5 { 
+                    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+                    color: #475569;
+                    border: 1px solid rgba(71, 85, 105, 0.2);
+                }
+                &.status-6 { 
+                    background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+                    color: #7c3aed;
+                    border: 1px solid rgba(124, 58, 237, 0.2);
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .applications-container {
+            padding: 30px 15px;
+
+            .application-card {
+                grid-template-columns: 1fr;
+
+                // Hide ticket border on mobile
+                &::before,
+                &::after,
+                .ticket-hole-bottom {
+                    display: none;
+                }
+
+                .application-meta {
+                    border-left: none;
+                    border-top: 3px solid #008060;
+                    margin-top: 16px;
+                    padding-top: 20px;
+                }
+            }
+
+            .application-meta .actions {
+                flex-direction: column;
+            }
+        }
+    }
+}
+
+

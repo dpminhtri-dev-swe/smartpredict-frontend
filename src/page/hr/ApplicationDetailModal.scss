@@ -1,0 +1,796 @@
+.application-detail-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 2rem;
+    animation: fadeIn 0.3s ease;
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .application-detail-modal {
+        background: white;
+        border-radius: 16px;
+        width: 100%;
+        max-width: 900px;
+        max-height: 90vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        animation: slideUp 0.3s ease;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #008060, #2bab60);
+            color: white;
+
+            h2 {
+                margin: 0;
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+
+            .close-btn {
+                background: rgba(255, 255, 255, 0.2);
+                border: none;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: white;
+                font-size: 1.2rem;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.3);
+                    transform: rotate(90deg);
+                }
+            }
+        }
+
+        .modal-body {
+            padding: 2rem;
+            overflow-y: auto;
+            flex: 1;
+
+            &::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: #f0f0f0;
+                border-radius: 4px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: #008060;
+                border-radius: 4px;
+
+                &:hover {
+                    background: #006d51;
+                }
+            }
+
+            h3 {
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: #1a1a1a;
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+
+                i {
+                    color: #008060;
+                }
+            }
+
+            > div {
+                margin-bottom: 2rem;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            // Status Section
+            .status-section {
+                background: linear-gradient(135deg, #f0fdf8, #e6f7f2);
+                padding: 1.5rem;
+                border-radius: 12px;
+                border-left: 4px solid #008060;
+
+                h3 {
+                    margin-bottom: 1rem;
+                }
+
+                .status-info {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 1rem;
+
+                    .status-badge {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        padding: 0.75rem 1.5rem;
+                        border-radius: 25px;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+
+                        i {
+                            font-size: 1.2rem;
+                        }
+
+                        &.pending {
+                            background: #fff3cd;
+                            color: #856404;
+                        }
+
+                        &.reviewing {
+                            background: #cfe2ff;
+                            color: #004085;
+                        }
+
+                        &.approved {
+                            background: #d1f2e6;
+                            color: #155724;
+                        }
+
+                        &.rejected {
+                            background: #f8d7da;
+                            color: #721c24;
+                        }
+
+                        &.cancelled {
+                            background: #e9ecef;
+                            color: #6c757d;
+                        }
+
+                        &.interviewed {
+                            background: #d1ecf1;
+                            color: #0c5460;
+                        }
+
+                        &.default {
+                            background: #e9ecef;
+                            color: #495057;
+                        }
+                    }
+
+                    .dates {
+                        display: flex;
+                        gap: 1.5rem;
+                        flex-wrap: wrap;
+
+                        span {
+                            display: flex;
+                            align-items: center;
+                            gap: 0.5rem;
+                            color: #666;
+                            font-size: 0.9rem;
+
+                            i {
+                                color: #008060;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Candidate Section
+            .candidate-section {
+                .candidate-card {
+                    background: linear-gradient(135deg, #ffffff, #f8fffe);
+                    border: 2px solid #e6f7f2;
+                    border-radius: 12px;
+                    padding: 1.5rem;
+                    display: flex;
+                    gap: 1.5rem;
+
+                    .candidate-avatar-large {
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                        background: linear-gradient(135deg, #008060, #2bab60);
+                        color: white;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: 700;
+                        font-size: 2.5rem;
+                        flex-shrink: 0;
+                        box-shadow: 0 4px 12px rgba(0, 128, 96, 0.3);
+                    }
+
+                    .candidate-details {
+                        flex: 1;
+
+                        h4 {
+                            font-size: 1.5rem;
+                            font-weight: 700;
+                            color: #1a1a1a;
+                            margin: 0 0 1rem;
+                        }
+
+                        .info-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                            gap: 1rem;
+
+                            .info-item {
+                                display: flex;
+                                align-items: flex-start;
+                                gap: 1rem;
+                                padding: 0.75rem;
+                                background: white;
+                                border-radius: 8px;
+
+                                > i {
+                                    width: 40px;
+                                    height: 40px;
+                                    border-radius: 8px;
+                                    background: linear-gradient(135deg, #008060, #2bab60);
+                                    color: white;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    flex-shrink: 0;
+                                }
+
+                                > div {
+                                    flex: 1;
+
+                                    label {
+                                        display: block;
+                                        font-size: 0.8rem;
+                                        color: #999;
+                                        text-transform: uppercase;
+                                        letter-spacing: 0.5px;
+                                        margin-bottom: 0.25rem;
+                                        font-weight: 600;
+                                    }
+
+                                    span {
+                                        display: block;
+                                        font-size: 0.95rem;
+                                        color: #333;
+                                        font-weight: 500;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // CV Section
+            .cv-section {
+                .cv-card {
+                    background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+                    border: 2px solid #ffd6d6;
+                    border-radius: 12px;
+                    padding: 1.5rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 1.5rem;
+
+                    .cv-icon {
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 12px;
+                        background: linear-gradient(135deg, #e74c3c, #c0392b);
+                        color: white;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 2rem;
+                        flex-shrink: 0;
+                        box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+                    }
+
+                    .cv-info {
+                        flex: 1;
+
+                        h4 {
+                            font-size: 1.2rem;
+                            font-weight: 600;
+                            color: #1a1a1a;
+                            margin: 0 0 0.5rem;
+                        }
+
+                        p {
+                            margin: 0;
+                            color: #666;
+                            font-size: 0.9rem;
+                        }
+                    }
+
+                    .btn-download-cv {
+                        padding: 0.75rem 1.5rem;
+                        background: linear-gradient(135deg, #e74c3c, #c0392b);
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        text-decoration: none;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+
+                        &:hover {
+                            transform: translateY(-2px);
+                            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+                        }
+                    }
+                }
+            }
+
+            // Cover Letter Section
+            .cover-letter-section {
+                .cover-letter-content {
+                    background: #f8f9fa;
+                    border-left: 4px solid #008060;
+                    padding: 1.5rem;
+                    border-radius: 8px;
+                    font-style: italic;
+                    color: #555;
+                    line-height: 1.8;
+
+                    p {
+                        margin: 0;
+                    }
+                }
+            }
+
+            // Job Section
+            .job-section {
+                .job-card {
+                    background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
+                    border: 2px solid #cce5ff;
+                    border-radius: 12px;
+                    padding: 1.5rem;
+
+                    h4 {
+                        font-size: 1.3rem;
+                        font-weight: 700;
+                        color: #1a1a1a;
+                        margin: 0 0 1rem;
+                    }
+
+                    .job-details {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 1.5rem;
+                        margin-bottom: 1rem;
+
+                        .detail-item {
+                            display: flex;
+                            align-items: center;
+                            gap: 0.5rem;
+                            color: #333;
+                            font-weight: 500;
+
+                            i {
+                                color: #4a90e2;
+                                font-size: 1.1rem;
+                            }
+                        }
+                    }
+
+                    .job-description {
+                        margin-top: 1rem;
+                        padding-top: 1rem;
+                        border-top: 1px solid #cce5ff;
+
+                        h5 {
+                            font-size: 1rem;
+                            font-weight: 600;
+                            color: #1a1a1a;
+                            margin: 0 0 0.75rem;
+                        }
+
+                        p {
+                            margin: 0;
+                            color: #555;
+                            line-height: 1.6;
+                        }
+                    }
+                }
+            }
+
+            // Company Section
+            .company-section {
+                .company-card {
+                    background: white;
+                    border: 2px solid #f0f0f0;
+                    border-radius: 12px;
+                    padding: 1.5rem;
+                    display: flex;
+                    gap: 1.5rem;
+                    align-items: flex-start;
+
+                    .company-logo-placeholder {
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 8px;
+                        background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 2rem;
+                        color: #999;
+                        flex-shrink: 0;
+                    }
+
+                    .company-logo {
+                        width: 80px;
+                        height: 80px;
+                        object-fit: contain;
+                        border-radius: 8px;
+                        border: 1px solid #e0e0e0;
+                        flex-shrink: 0;
+                    }
+
+                    .company-info {
+                        flex: 1;
+
+                        h4 {
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                            color: #1a1a1a;
+                            margin: 0 0 0.75rem;
+                        }
+
+                        p {
+                            margin: 0.5rem 0;
+                            color: #666;
+                            display: flex;
+                            align-items: center;
+                            gap: 0.5rem;
+
+                            i {
+                                color: #008060;
+                                width: 20px;
+                            }
+
+                            a {
+                                color: #4a90e2;
+                                text-decoration: none;
+
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 2px solid #f0f0f0;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            background: #f8f9fa;
+
+            button {
+                padding: 0.875rem 2rem;
+                border: none;
+                border-radius: 8px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+
+                i {
+                    font-size: 1.2rem;
+                }
+
+                &.btn-reject-action {
+                    background: white;
+                    color: #e74c3c;
+                    border: 2px solid #e74c3c;
+
+                    &:hover {
+                        background: #e74c3c;
+                        color: white;
+                        transform: translateY(-2px);
+                        box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+                    }
+                }
+
+                &.btn-approve-action {
+                    background: linear-gradient(135deg, #27ae60, #229954);
+                    color: white;
+
+                    &:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .application-detail-modal-overlay {
+        padding: 1rem;
+
+        .application-detail-modal {
+            .modal-header {
+                padding: 1rem 1.5rem;
+
+                h2 {
+                    font-size: 1.2rem;
+                }
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+
+                .candidate-section {
+                    .candidate-card {
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+
+                        .candidate-details {
+                            .info-grid {
+                                grid-template-columns: 1fr;
+                            }
+                        }
+                    }
+                }
+
+                .cv-section {
+                    .cv-card {
+                        flex-direction: column;
+                        text-align: center;
+
+                        .btn-download-cv {
+                            width: 100%;
+                            justify-content: center;
+                        }
+                    }
+                }
+
+                .company-section {
+                    .company-card {
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+                    }
+                }
+            }
+
+            .documents-section {
+                margin-top: 2rem;
+                padding-top: 2rem;
+                border-top: 2px solid #f0f0f0;
+
+                h3 {
+                    margin-bottom: 1rem;
+                    color: #1f2937;
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+
+                .loading-state,
+                .empty-state {
+                    text-align: center;
+                    padding: 2rem;
+                    color: #6b7280;
+
+                    i {
+                        font-size: 2rem;
+                        margin-bottom: 0.5rem;
+                        color: #9ca3af;
+                    }
+                }
+
+                .documents-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+
+                    .document-item {
+                        background: white;
+                        border: 2px solid #e5e7eb;
+                        border-radius: 12px;
+                        padding: 1.5rem;
+                        transition: all 0.2s;
+
+                        &:hover {
+                            border-color: #008060;
+                            box-shadow: 0 4px 12px rgba(0, 128, 96, 0.1);
+                        }
+
+                        .doc-header {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: flex-start;
+                            margin-bottom: 1rem;
+
+                            .doc-info {
+                                display: flex;
+                                gap: 1rem;
+                                flex: 1;
+
+                                i {
+                                    font-size: 2rem;
+                                    color: #008060;
+                                    margin-top: 0.25rem;
+                                }
+
+                                h4 {
+                                    margin: 0 0 0.5rem 0;
+                                    color: #1f2937;
+                                    font-size: 1rem;
+                                    font-weight: 600;
+                                }
+
+                                p {
+                                    margin: 0.25rem 0;
+                                    font-size: 0.875rem;
+                                    color: #6b7280;
+
+                                    i {
+                                        font-size: 0.875rem;
+                                        margin-right: 0.5rem;
+                                    }
+
+                                    &.expiry-date {
+                                        color: #f59e0b;
+                                    }
+
+                                    &.bank-account {
+                                        color: #008060;
+                                    }
+
+                                    &.doc-notes {
+                                        font-style: italic;
+                                        color: #9ca3af;
+                                    }
+                                }
+                            }
+
+                            .status-badge {
+                                padding: 0.375rem 0.75rem;
+                                border-radius: 6px;
+                                font-size: 0.75rem;
+                                font-weight: 600;
+                                text-transform: uppercase;
+
+                                &.status-pending {
+                                    background: #fef3c7;
+                                    color: #92400e;
+                                }
+
+                                &.status-approved {
+                                    background: #d1fae5;
+                                    color: #065f46;
+                                }
+
+                                &.status-rejected {
+                                    background: #fee2e2;
+                                    color: #991b1b;
+                                }
+                            }
+                        }
+
+                        .doc-actions {
+                            display: flex;
+                            gap: 0.75rem;
+                            flex-wrap: wrap;
+
+                            .btn-view-file,
+                            .btn-approve-doc,
+                            .btn-reject-doc {
+                                padding: 0.5rem 1rem;
+                                border-radius: 6px;
+                                border: none;
+                                font-size: 0.875rem;
+                                font-weight: 600;
+                                cursor: pointer;
+                                transition: all 0.2s;
+                                display: flex;
+                                align-items: center;
+                                gap: 0.5rem;
+
+                                &:disabled {
+                                    opacity: 0.6;
+                                    cursor: not-allowed;
+                                }
+                            }
+
+                            .btn-view-file {
+                                background: #f3f4f6;
+                                color: #374151;
+                                text-decoration: none;
+
+                                &:hover {
+                                    background: #e5e7eb;
+                                }
+                            }
+
+                            .btn-approve-doc {
+                                background: #10b981;
+                                color: white;
+
+                                &:hover:not(:disabled) {
+                                    background: #059669;
+                                }
+                            }
+
+                            .btn-reject-doc {
+                                background: #ef4444;
+                                color: white;
+
+                                &:hover:not(:disabled) {
+                                    background: #dc2626;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .modal-footer {
+                padding: 1rem 1.5rem;
+                flex-direction: column;
+
+                button {
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}
+
