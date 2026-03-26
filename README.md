@@ -61,26 +61,26 @@ Dự án được xây dựng theo mô hình **Microservices** giao tiếp qua R
 
 ```mermaid
 flowchart TB
-    subgraph Client [🌐 Client Tier]
+    subgraph Client ["🌐 Client Tier"]
         A(Ứng Viên - Candidate App)
         B(Quản Trị Nhân Sự - HR Portal)
     end
 
-    subgraph API [⚙️ Node.js Core API]
+    subgraph API ["⚙️ Node.js Core API"]
         C[Express Controller]
         D[Auth / JWT Middleware]
         E[Background Jobs / Cron]
         F[(MySQL DB & Sequelize)]
     end
 
-    subgraph AIEngine [🧠 AI & ML Services (Python)]
+    subgraph AIEngine ["🧠 AI & ML Services (Python)"]
         G[FastAPI Server]
         H[Sentence-BERT Embedder]
         I[Auto-Grader Model LR]
         J[LLM Integration / OpenAI]
     end
     
-    subgraph ThirdParty [🛰️ External / WebRTC]
+    subgraph ThirdParty ["🛰️ External / WebRTC"]
         K[Jitsi Meet Server]
         L[Email Service NodeMailer]
     end
