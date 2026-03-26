@@ -1,14 +1,17 @@
 <div align="center">
-  <!-- Banner hoặc Logo của dự án -->
-  <img src="https://via.placeholder.com/1000x300/1a1a2e/00d4ff?text=+HIRING+PLATFORM+INTEGRATED+WITH+AI+/+ML+" alt="Project Banner" style="border-radius: 10px; width: 100%;" />
 
-  <br />
-  <br />
 
   <h1>🚀 HỆ THỐNG TUYỂN DỤNG THÔNG MINH (AI-POWERED RECRUITMENT ATS)</h1>
 
   <p align="center">
     <strong>Tự động hóa toàn diện quy trình tuyển dụng: CV Matching, Trắc nghiệm trực tuyến, Chấm thi Tự luận tự động (Sentence-BERT), và Phỏng vấn WebRTC (Jitsi).</strong>
+  </p>
+  
+  <p align="center">
+    <b>🔗 Hệ Sinh Thái Dự Án (Ecosystem links):</b><br/>
+    <a href="https://github.com/dpminhtri-dev-swe/smartpredict-frontend">🌐 Frontend (React.js)</a> &nbsp;|&nbsp;
+    <a href="https://github.com/dpminhtri-dev-swe/smartpredict-backend">⚙️ Backend (Node.js)</a> &nbsp;|&nbsp;
+    <a href="https://github.com/dpminhtri-dev-swe/smartpredict-python-training">🧠 AI/ML Engine (Python)</a>
   </p>
 
   <p align="center">
